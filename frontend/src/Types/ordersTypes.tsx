@@ -32,9 +32,14 @@ export interface Breakdown {
   total: number;
 }
 
+export type OrderStatus =
+  | "production_ready"
+  | "approved"
+  | "canceled";
+
 export interface Order {
   id: string;
-  status: "Production Ready" | "Approved" | "Canceled";
+  status: OrderStatus;
   date: string;
   total: number;
   products: Product[];
