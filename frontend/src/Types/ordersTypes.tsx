@@ -32,19 +32,31 @@ export interface Breakdown {
   total: number;
 }
 
-export type OrderStatus =
-  | "production_ready"
-  | "approved"
-  | "canceled";
+export type OrderStatus = "production_ready" | "approved" | "canceled";
 
+export interface OrderItem {
+  id: number;
+  name: string;
+  quantity: number;
+  price: string;
+}
+
+// Unified Order interface that supports both mock and API data
 export interface Order {
-  id: string;
+  // Common fields (both sources)
+  id: string | number;
   status: OrderStatus;
   date: string;
-  total: number;
-  products: Product[];
-  customer: Customer;
-  shipping: Shipping;
-  payment: Payment;
-  breakdown: Breakdown;
+  total: string | number;
+
+  // Django API fields
+  order_id?: string;
+  items?: OrderItem[];
+
+  // Mock data fields
+  products?: Product[];
+  customer?: Customer;
+  shipping?: Shipping;
+  payment?: Payment;
+  breakdown?: Breakdown;
 }

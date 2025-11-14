@@ -8,50 +8,77 @@ const MyOrders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [useMockData, setUseMockData] = useState<boolean>(false);
 
-  const filters = ["All orders", "Canceled", "Approved", "Production Ready"];
+  const filters = ["All orders", "Production Ready", "Approved", "Canceled"];
 
   const toggleOrder = (id: string) => {
     setExpandedOrder((prev) => (prev === id ? null : id));
   };
 
-  // 🧠 Busca os pedidos no backend Django
+  // 🧠 Busca os pedidos do backend Django ou mock data
   const fetchOrders = useCallback(async (): Promise<void> => {
     setLoading(true);
     setError(null);
 
     try {
-      const baseUrl = "http://127.0.0.1:8000/orders/";
-      const query =
-        activeFilter !== "All orders"
-          ? `?status=${encodeURIComponent(
-              activeFilter.toLowerCase().replace(" ", "_")
-            )}`
-          : "";
+      if (useMockData) {
+        // Import and use mock data
+        const { ordersData } = await import("../data/ordersMock");
+        let filteredOrders = ordersData;
 
-      const response = await fetch(baseUrl + query);
-      if (!response.ok) throw new Error("Erro ao buscar pedidos");
+        if (activeFilter !== "All orders") {
+          filteredOrders = ordersData.filter((order) => {
+            const normalizedOrderStatus = order.status.toLowerCase().replace(" ", "_");
+            const normalizedFilter = activeFilter.toLowerCase().replace(" ", "_");
+            return normalizedOrderStatus === normalizedFilter;
+          });
+        }
 
-      const data: unknown = await response.json();
-      const results = (data as { results?: Order[] }).results || (data as Order[]);
-      setOrders(results);
+        setOrders(filteredOrders);
+      } else {
+        // Fetch from Django API
+        const baseUrl = "http://127.0.0.1:9001/api/orders/";
+        const query =
+          activeFilter !== "All orders"
+            ? `?status=${encodeURIComponent(activeFilter.toLowerCase().replace(" ", "_"))}`
+            : "";
+
+        const response = await fetch(baseUrl + query);
+        if (!response.ok) throw new Error("Erro ao buscar pedidos");
+
+        const data: unknown = await response.json();
+        const results = (data as { results?: Order[] }).results || (data as Order[]);
+        setOrders(results);
+      }
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
       else setError("Erro desconhecido");
     } finally {
       setLoading(false);
     }
-  }, [activeFilter]); // ✅ dependência estável
+  }, [activeFilter, useMockData]); // ✅ dependência estável
 
   useEffect(() => {
     fetchOrders();
   }, [fetchOrders]); // ✅ eslint feliz
 
-
   return (
     <div className="bg-white font-sans text-sm text-gray-800 w-full px-4 lg:pr-36 pt-10">
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold mb-6">My Orders</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-semibold">My Orders</h1>
+          <button
+            onClick={() => setUseMockData(!useMockData)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              useMockData
+                ? "bg-green-100 text-green-700 border border-green-300"
+                : "bg-blue-100 text-blue-700 border border-blue-300"
+            }`}
+          >
+            {useMockData ? "Using Mock Data" : "Using API Data"}
+          </button>
+        </div>
 
         {/* FILTROS */}
         <div className="relative">
@@ -84,9 +111,9 @@ const MyOrders: React.FC = () => {
         {!loading &&
           orders.map((order) => (
             <OrderAccordion
-              key={order.id}
+              key={order.id.toString()}
               order={order}
-              expanded={expandedOrder === order.id}
+              expanded={expandedOrder === order.id.toString()}
               onToggle={toggleOrder}
             />
           ))}

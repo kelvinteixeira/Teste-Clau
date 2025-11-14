@@ -3,15 +3,14 @@ import type { Order } from "../Types/ordersTypes";
 export const ordersData: Order[] = [
   {
     id: "DW983083694-1",
-    status: "Production Ready",
+    status: "production_ready",
     date: "2024-01-15",
     total: 156.8,
     products: [
       {
         id: "1",
         name: "#Item001",
-        fragrance:
-          "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
+        fragrance: "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
         size: "8oz",
         price: 24.99,
         image: "/images/Frame1.png",
@@ -19,8 +18,7 @@ export const ordersData: Order[] = [
       {
         id: "2",
         name: "#Item002",
-        fragrance:
-          "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
+        fragrance: "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
         size: "10ml x 3",
         price: 89.99,
         image: "/images/Frame2.png",
@@ -28,8 +26,7 @@ export const ordersData: Order[] = [
       {
         id: "3",
         name: "#Item003",
-        fragrance:
-          "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
+        fragrance: "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
         size: "150ml",
         price: 41.82,
         image: "/images/Frame3.png",
@@ -59,15 +56,14 @@ export const ordersData: Order[] = [
   },
   {
     id: "DW983083695-2",
-    status: "Approved",
+    status: "approved",
     date: "2024-01-14",
     total: 89.99,
     products: [
       {
         id: "4",
         name: "#Item004",
-        fragrance:
-          "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
+        fragrance: "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
         size: "5pc Set",
         price: 89.99,
         image: "/images/Frame3.png",
@@ -97,15 +93,14 @@ export const ordersData: Order[] = [
   },
   {
     id: "DW983083695-3",
-    status: "Canceled",
+    status: "canceled",
     date: "2024-01-14",
     total: 89.99,
     products: [
       {
         id: "4",
         name: "#Item004",
-        fragrance:
-          "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
+        fragrance: "Custom Shape — AI, Full colorFragrance — Vanilla String color — White",
         size: "5pc Set",
         price: 89.99,
         image: "/images/Frame3.png",

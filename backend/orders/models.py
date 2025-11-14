@@ -4,8 +4,8 @@ from datetime import date
 class Order(models.Model):
     STATUS_CHOICES = [
         ('production_ready', 'Production Ready'),
+        ('approved', 'Approved'),
         ('canceled', 'Canceled'),
-        ('shipped', 'Shipped'),
     ]
 
     order_id = models.CharField(max_length=50, unique=True)

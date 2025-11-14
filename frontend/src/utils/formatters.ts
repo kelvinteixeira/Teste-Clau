@@ -10,3 +10,13 @@ export const formatCurrency = (amount: number) =>
     style: "currency",
     currency: "USD",
   }).format(amount);
+
+export const formatStatus = (status: string) => {
+  const statusMap: Record<string, string> = {
+    production_ready: "Production Ready",
+    approved: "Approved",
+    canceled: "Canceled",
+  };
+
+  return statusMap[status] || status.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+};
