@@ -123,7 +123,7 @@ const OrderAccordion: React.FC<OrderAccordionProps> = ({ order, expanded, onTogg
                       key={item.id}
                       src={item.image}
                       alt={item.name}
-                      className="w-10 h-10 rounded-2xl border-2 border-white object-cover"
+                      className=" p-1.5 rounded-2xl border-2 border-white object-cover"
                       style={{ zIndex: 3 - index }}
                     />
                   ) : (

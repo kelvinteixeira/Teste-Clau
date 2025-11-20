@@ -38,7 +38,7 @@ const MyOrders: React.FC = () => {
         setOrders(filteredOrders);
       } else {
         // Fetch from Django API
-        const baseUrl = "http://127.0.0.1:9001/api/orders/";
+        const baseUrl = "http://127.0.0.1:8000/api/orders/";
         const query =
           activeFilter !== "All orders"
             ? `?status=${encodeURIComponent(activeFilter.toLowerCase().replace(" ", "_"))}`

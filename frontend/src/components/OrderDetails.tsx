@@ -67,24 +67,24 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
           {hasFullOrderData() ? (
             <div>
               <div className="bg-white rounded-lg p-4 space-y-2">
-                <div className="flex justify-between">
+                <div className="flex justify-between pb-4 font-medium text-sm sm:text-base">
                   <span>Items:</span>
                   <span>{formatCurrency(order.breakdown!.items)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between pb-4 font-medium text-sm sm:text-base">
                   <span>Shipping:</span>
                   <span>{formatCurrency(order.breakdown!.shipping)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between pb-4 font-medium text-sm sm:text-base">
                   <span>Handling:</span>
                   <span>{formatCurrency(order.breakdown!.handling)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between pb-4 font-medium text-sm sm:text-base">
                   <span>Tax:</span>
                   <span>{formatCurrency(order.breakdown!.tax)}</span>
                 </div>
-                <div className="flex justify-between border-t border-gray-200 pt-2 font-semibold text-2xl">
-                  <span>Total:</span>
+                <div className="flex justify-between border-t border-gray-200 pt-4 font-semibold text-2xl">
+                  <span>Due to payment:</span>
                   <span>{formatCurrency(order.breakdown!.total)}</span>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
           {hasFullOrderData() ? (
             <div className="bg-white rounded-xl  p-5 space-y-3">
               <h4 className="text-gray-400 mb-4 flex items-center gap-2  p-2 ">
-                Personal data & Shipping
+                Personal data & Shipping address
               </h4>
               <div>
                 <p className="font-semibold text-gray-800 flex items-center gap-2 text-2xl">
@@ -219,10 +219,10 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
       </div>
 
       <div className="flex flex-col sm:flex-row sm:justify-end gap-3 mt-6 pt-6 border-t border-gray-200">
-        <button className="flex  items-center justify-center gap-2 lg:px-8 py-3 bg-blue-600 text-white rounded-3xl hover:bg-blue-700 transition-colors w-full sm:w-auto lg:order-2 sm:order-0">
+        <button className="flex  items-center justify-center gap-2 lg:px-8 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors w-full sm:w-auto lg:order-2 sm:order-0">
           Re-Order
         </button>
-        <button className="flex items-center justify-center gap-2 lg:px-8 py-3 border border-gray-300 rounded-3xl text-gray-700 hover:bg-gray-50 transition-colors w-full lg:order-1 sm:w-auto order-2 sm:order-0 font-bold">
+        <button className="flex items-center justify-center gap-2 lg:px-8 py-3 border border-gray-300 rounded-2xl text-gray-700 hover:bg-gray-50 transition-colors w-full lg:order-1 sm:w-auto order-2 sm:order-0 font-bold">
           <FaFileDownload className="w-4 h-4" />
           Download PDF
         </button>
